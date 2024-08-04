@@ -1,6 +1,5 @@
 import utils
 import streamlit as st
-from streaming import StreamHandler
 from streamlit.runtime.scriptrunner.script_run_context import get_script_run_ctx
 import os
 from langchain.memory import ConversationBufferMemory
