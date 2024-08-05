@@ -54,13 +54,13 @@ class RAGChatbot:
             chunk_size=1000,
             chunk_overlap=0
         )
-        # model_name = "BAAI/bge-m3"
-        # model_kwargs = {"device": "cuda"}
-        # encode_kwargs = {"normalize_embeddings": True}
-        # embeddings = HuggingFaceBgeEmbeddings(
-        #     model_name=model_name, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
-        # )
-        embeddings = OpenAIEmbeddings(openai_api_key=st.secrets["OPENAI_API_KEY"])
+        model_name = "BAAI/bge-m3"
+        model_kwargs = {"device": "cuda"}
+        encode_kwargs = {"normalize_embeddings": True}
+        embeddings = HuggingFaceBgeEmbeddings(
+            model_name=model_name, model_kwargs=model_kwargs, encode_kwargs=encode_kwargs
+        )
+        # embeddings = OpenAIEmbeddings(openai_api_key=st.secrets["OPENAI_API_KEY"])
         splits = text_splitter.split_documents(docs)
         db = FAISS.from_documents(splits, embeddings)
         retriever = db.as_retriever(search_type="similarity", search_kwargs={"k": 5})
