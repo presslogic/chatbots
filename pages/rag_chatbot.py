@@ -94,6 +94,7 @@ class RAGChatbot:
                  retrieval_chain = st.session_state["retrieval_chain"]
         else:
             st.error("Please upload PDF documents to continue!")
+            st.stop()
         user_query = st.chat_input(placeholder="Ask me anything!")
         if "messages" not in st.session_state:
             st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
