@@ -7,12 +7,6 @@ from langchain.tools import Tool
 from datetime import datetime
 from langchain.agents import load_tools, initialize_agent
 from langchain.agents import AgentType
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.embeddings import HuggingFaceBgeEmbeddings
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain_community.vectorstores import FAISS
-from langchain.chains import RetrievalQA
 
 st.set_page_config(page_title="Chatbot", page_icon="💬")
 st.header('Web search chatbot')
