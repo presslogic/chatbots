@@ -20,6 +20,7 @@ st.header('PL Chatbot')
 class BasicChatbot:
 
     def __init__(self):
+        utils.clear_session_button()
         utils.sync_st_session()
         self.llm = utils.config_llm()
         if 'llm' not in st.session_state:
@@ -59,7 +60,7 @@ class BasicChatbot:
         # embeddings = OpenAIEmbeddings(openai_api_key=st.secrets["OPENAI_API_KEY"])
         splits = text_splitter.split_documents(docs)
         db = FAISS.from_documents(splits, embeddings)
-        retriever = db.as_retriever(search_kwargs={"k": 5})
+        retriever = db.as_retriever(search_type="similarity", search_kwargs={"k": 5})
         qa_llm_chain = RetrievalQA.from_chain_type(llm=self.llm, chain_type="stuff", retriever=retriever)
         langchain_tool = Tool(
             name=file_description,
