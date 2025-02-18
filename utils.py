@@ -1,17 +1,19 @@
-from langchain_openai.chat_models import ChatOpenAI
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_ollama import ChatOllama
 import streamlit as st
+url = "https://ollama.medialens.io/"
 def config_llm():
-    available_llms = ["gpt-4o-mini","gemini-pro"]
+    available_llms = ["deepseek-r1:14b","deepseek-r1:8b","deepseek-r1:7b"]
     llm_opt = st.sidebar.radio(
         label="LLM",
         options=available_llms,
         key="SELECTED_LLM"
         )
-    if llm_opt == "gpt-4o-mini":
-        llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0.1, api_key=st.secrets["OPENAI_API_KEY"], max_tokens=4096)
-    else:
-        llm = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.1, api_key=st.secrets["GOOGLE_API_KEY"])
+    if llm_opt == "deepseek-r1:14b":
+        llm = ChatOllama(model="deepseek-r1:14b", base_url=url)
+    elif llm_opt == "deepseek-r1:8b":
+        llm = ChatOllama(model="deepseek-r1:8b", base_url=url)
+    elif llm_opt == "deepseek-r1:7b":
+        llm = ChatOllama(model="deepseek-r1:7b", base_url=url)
     return llm
 
 def clear_session_button():
